@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0B0A07;
+  --color-coal: #12100B;
+  --color-soot: #1A1710;
+  --color-ivory: #F1EAD9;
+  --color-sand: #B7AC93;
+  --color-gold: #C7A15C;
+  --color-gold2: #E9CF9B;
+  --color-moss: #23523D;
+  --color-crimson: #C25B4E;
+  --font-poster: "Anton", "Arial Narrow", sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--color-ink);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection { background: var(--color-gold); color: var(--color-ink); }
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #0B0A07; }
+::-webkit-scrollbar-thumb { background: #2c2618; border-radius: 8px; border: 2px solid #0B0A07; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-gold); }
+
+/* ---------- signature details ---------- */
+
+.checkers {
+  background-image: repeating-conic-gradient(var(--color-ivory) 0% 25%, transparent 0% 50%);
+  background-size: 22px 22px;
+}
+.checkers-dark {
+  background-image: repeating-conic-gradient(rgba(241,234,217,.14) 0% 25%, transparent 0% 50%);
+  background-size: 22px 22px;
+}
+.checkers-slide { animation: checkerslide 1.4s linear infinite; }
+@keyframes checkerslide { to { background-position-x: 44px; } }
+
+.gold-grad {
+  background: linear-gradient(102deg, #937038 0%, #e9cf9b 38%, #c7a15c 62%, #f2e2b6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1.5px rgba(241,234,217,.28);
+  color: transparent;
+}
+.text-stroke-faint {
+  -webkit-text-stroke: 1px rgba(241,234,217,.12);
+  color: transparent;
+}
+
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  opacity: .05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.hairline { border-color: rgba(241,234,217,.13); }
+
+/* ---------- motion utilities ---------- */
+
+.marquee { animation: marquee var(--speed, 36s) linear infinite; will-change: transform; }
+.marquee:hover { animation-play-state: paused; }
+.marquee-rev { animation-direction: reverse; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.kenburns { animation: kenburns 14s ease-in-out infinite alternate; }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.12); } }
+
+.shine { position: relative; overflow: hidden; }
+.shine::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-120%) skewX(-18deg);
+  background: linear-gradient(90deg, transparent, rgba(233,207,155,.16), transparent);
+  transition: transform .9s cubic-bezier(.22,1,.36,1);
+}
+.shine:hover::after { transform: translateX(120%) skewX(-18deg); }
+
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+.floaty { animation: floaty 6s ease-in-out infinite; }
+
+/* ---------- form fields ---------- */
+
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(241,234,217,.22);
+  padding: 14px 2px;
+  color: var(--color-ivory);
+  font-size: 15px;
+  letter-spacing: .02em;
+  outline: none;
+  transition: border-color .3s;
+  border-radius: 0;
+}
+.field::placeholder { color: rgba(183,172,147,.55); }
+.field:focus { border-color: var(--color-gold); }
+select.field option { background: #12100B; color: var(--color-ivory); }
+
+.field-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--color-sand);
+  margin-bottom: 2px;
+}
+
+/* ---------- menu dot leaders ---------- */
+.leader {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted rgba(241,234,217,.28);
+  transform: translateY(-4px);
+  min-width: 24px;
+}
+
+/* ---------- misc ---------- */
+.vignette::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 10%, transparent 40%, rgba(11,10,7,.75) 100%);
+  pointer-events: none;
+}
+
+.clip-photo { clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 96%); }
+
+@media (max-width: 768px) {
+  .checkers, .checkers-dark { background-size: 16px 16px; }
+}
